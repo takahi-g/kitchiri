@@ -28,6 +28,9 @@ export default function AddItemModal({ isOpen, onClose, onSave, onBatchSave, ini
   const [analyzedSuccessName, setAnalyzedSuccessName] = useState<string | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
+  // 解析後の確認待ちデータ
+  const [pendingScannedItems, setPendingScannedItems] = useState<any[] | null>(null);
+
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -74,9 +77,6 @@ export default function AddItemModal({ isOpen, onClose, onSave, onBatchSave, ini
 
     onClose();
   };
-
-  // 解析後の確認待ちデータ
-  const [pendingScannedItems, setPendingScannedItems] = useState<any[] | null>(null);
 
   // 本格クライアント＆サーバー両用 AI Vision API 連携処理
   const handleProductPhotoCapture = async (e: React.ChangeEvent<HTMLInputElement>) => {

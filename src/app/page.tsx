@@ -40,7 +40,7 @@ export default function Home() {
   const [isRefreshing, setIsRefreshing] = useState(false);
 
   // バージョン情報
-  const appVersion = 'ver. 2026.09.23 13:16';
+  const appVersion = 'ver. 2026.09.23 13:23';
 
   const loadData = () => {
     const loadedItems = getStoredItems();
