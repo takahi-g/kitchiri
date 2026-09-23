@@ -122,8 +122,15 @@ export default function AddItemModal({ isOpen, onClose, onSave, onBatchSave, ini
           return;
         }
 
-        const buffer = await file.arrayBuffer();
-        const base64Image = Buffer.from(buffer).toString('base64');
+        const base64Image = await new Promise<string>((resolve, reject) => {
+          const reader = new FileReader();
+          reader.onload = () => {
+            const resStr = reader.result as string;
+            resolve(resStr.split(',')[1] || '');
+          };
+          reader.onerror = reject;
+          reader.readAsDataURL(file);
+        });
         const mimeType = file.type || 'image/jpeg';
 
         const prompt = 'あなたは食材写真判別の高度AIです。\n' +
